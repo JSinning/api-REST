@@ -1,7 +1,7 @@
-import express from 'express';
-const router = express.Router();
+import {Router} from 'express';
+const router = Router();
 
-import Nota from '../models/NOTAS';
+import Nota from '../models/NOTAS.js';
 //METODO POST
 router.post('/nueva-nota', async(req, res) => {
     const body = req.body;
@@ -33,9 +33,9 @@ router.get('/nota', async(req, res) => {
 
 //METODO GET con patrametros
 router.get('/nota/:id', async(req, res) => {
-    const _id =  req.params.id;
+    const userid =  req.params.id;
     try {
-        const notaDb = await Nota.findOne({_id});
+        const notaDb = await Nota.findOne({userid});
         return res.json(notaDb);
     } catch (error) {
        return res.status(400).json({
@@ -48,10 +48,10 @@ router.get('/nota/:id', async(req, res) => {
 
 //METODO DELETE
 router.delete('/nota/:id', async(req, res) => {
-    const _id  = req.params.id;
+    const userid  = req.params.id;
 
     try {
-        const notaDb =  await Nota.findByIdAndDelete({_id});
+        const notaDb =  await Nota.findOneAndDelete({userid: userid});
 
         if(!notaDb){
             return res.status(500).json({
@@ -74,12 +74,12 @@ router.delete('/nota/:id', async(req, res) => {
 
 //METODO PUT 
 router.put('/nota/:id',  async(req, res) =>{
-    const _id = req.params.id;
+    const userid = req.params.id;
     const body = req.body;
     
     try {
-        const notaDb = await Nota.findByIdAndUpdate(
-            _id,
+        const notaDb = await Nota.findOneAndUpdate(
+            userid,
             body,
             {new: true},
         );
@@ -94,4 +94,4 @@ router.put('/nota/:id',  async(req, res) =>{
 });
 
 //exportacion del Rout
-module.exports = router;
+export default router;
