@@ -6,11 +6,13 @@ import path from 'path';
 import mongoose from 'mongoose';
 import history from'connect-history-api-fallback';
 import NotasRout from './routers/NotasRout.js';
+import Registros from './routers/Login.js';
 const app = express();
 // Obteniendo el directorio base usando import.meta.url
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-//conexion DB
+
+//conexion DB Mongo
 const uri = 'mongodb://localhost:27017/myapp';
 const options = {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true};
 
@@ -18,6 +20,7 @@ mongoose.connect(uri, options).then(
   () => { console.log("Conexion exitosa"); },
   err => { console.log(err); }
 );
+
 
 //Middeleware
 app.use(morgan('tiny'));
@@ -29,6 +32,7 @@ app.use(express.urlencoded({ extended: true }));
 
 //Rutas
 app.use('/api', NotasRout);
+app.use('/api/registros', Registros);
 
 // Middleware para Vue.js router modo history
 // const history = require('connect-history-api-fallback');
