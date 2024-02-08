@@ -15,7 +15,7 @@ try {
        });
     }
    return res.status(200).json({
-    messaje: "Datos de /get",
+    messaje: "/get",
     staust: 200,
     data: register.rows
    })
@@ -31,22 +31,21 @@ try {
 
 router.post('/add', async(req, res) => {
      const body = req.body;
-  try {
-      const queri = 'INSERT INTO login(usrname, password, email) VALUES ($1, $2, $3)';
-      const values = [body.username, body.pass, body.email]; // {username: test, pass: test123,  email:test@test.com }
-      const register = await config.query(queri, values);
-    
-     return res.status(200).json({
-      messaje: "/post",
-      staust: 200,
-      data: register.rowCount
-     })
-      
-  } catch (error) {
-      return res.status(500).json({
-          mensaje: 'ocurio un error',
-          error
-      })
+     try {
+        const queri = 'INSERT INTO login(usrname, password, email) VALUES ($1, $2, $3)';
+        const values = [body.username, body.pass, body.email]; // {username: test, pass: test123,  email:test@test.com }
+        const register = await config.query(queri, values);
+        
+        return res.status(200).json({
+            messaje: "/post",
+            staust: 200,
+            data: register.rowCount
+        })
+    } catch (error) {
+        return res.status(500).json({
+            mensaje: 'ocurio un error',
+            error
+        })
   }
   });
 
