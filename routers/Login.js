@@ -51,7 +51,7 @@ router.post('/add', async(req, res) => {
 
   router.get('/find/:username', async(req, res) => {
     try {
-        const register = await config.query(`select usrname, password, email from login where usrname='${req.params.username}'`);
+        const register = await config.query(`select id, usrname, password, email from login where usrname='${req.params.username}'`);
         if(!register.rows.length){
           return res.status(404).json({
             mensaje: `El usuario ${req.params.username} no existe`,
