@@ -6,5 +6,5 @@ export const config = new Pool({
     user: 'postgres',
     password: 'posgres123',
     database: 'Registros',
-    port:5432
+    port:5433
   });

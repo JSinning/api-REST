@@ -13,7 +13,7 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
 
 //conexion DB Mongo
-const uri = 'mongodb://localhost:27017/myapp';
+const uri = 'mongodb://localhost:27018/myapp';
 const options = {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true};
 
 mongoose.connect(uri, options).then(
