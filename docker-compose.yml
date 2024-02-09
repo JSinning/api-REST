@@ -9,6 +9,19 @@ services:
     ports:
       - 5433:5432
   mongodb:
+    depends_on:
+      - posgresdb
     image: mongo
     ports:
       - 27018:27017
+  app:
+    build: .
+    depends_on:
+      - posgresdb
+      - mongodb
+    links:
+      - posgresdb
+      - mongodb
+    ports:
+      - 3000:3000
+    
