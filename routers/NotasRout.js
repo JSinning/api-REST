@@ -35,7 +35,7 @@ router.get('/nota', async(req, res) => {
 router.get('/nota/:id', async(req, res) => {
     const userid =  req.params.id;
     try {
-        const notaDb = await Nota.findOne({userid});
+        const notaDb = await Nota.find({userid});
         return res.json(notaDb);
     } catch (error) {
        return res.status(400).json({
