@@ -1,0 +1,14 @@
+version: '3.8'
+
+services: 
+  posgresdb:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=posgres123
+      - POSTGRES_DB=Registros
+    ports:
+      - 5433:5432
+  mongodb:
+    image: mongo
+    ports:
+      - 27018:27017
